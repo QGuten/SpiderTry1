@@ -28,7 +28,7 @@ headers = {
     # 'X-Xsrf-Token': 'a08d05',
 }
 
-max_page = 1000
+max_page = 300
 
 def get_page(page, since_id: str):
     params = {
@@ -92,8 +92,13 @@ def parse_page(json, page: int):
     # print(type(json))
     # print(json)
     while json:
-        since_id = json.get('data').get('pageInfo').get('since_id')
+        try:
+            since_id = json.get('data').get('pageInfo').get('since_id')
         # print('parse_page函数内部的打印:'+(page, since_id))
+        except:
+            print('没有since_id了。回到超话下最新的内容开始获取。')
+            since_id = ''
+            break
 
         items = json.get('data').get('cards')   # cards是个列表
         # print(type(items))  # cards是个list
@@ -143,12 +148,12 @@ def parse_page(json, page: int):
             db.save_data_to_mysql(data)
 
             # 休息间隔再获取下一个item，防止封禁
-            # time.sleep(random.uniform(2,5))
+            time.sleep(random.uniform(2,4))
         return since_id  # yield表示返回值则表示该函数是个生成器。
 
 
 if __name__ == '__main__':
-    since_id = '4623449860873017'
+    since_id = '4625611660203256'
     db.create_t_blogs()
     for page in range(1, max_page + 1):
         print('main函数中打印的page:'+str(page))
@@ -157,4 +162,4 @@ if __name__ == '__main__':
         # print(type(json)) # tuple
         # print(since_id, *json)
         since_id = parse_page(*json)    # 获取下一页的since_id
-        time.sleep(random.uniform(3,10))
+        time.sleep(random.uniform(4,14))
