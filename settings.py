@@ -4,4 +4,4 @@ MYSQL_PORT = 3306
 MYSQL_USER = 'root'
 MYSQL_PWD = 'newpassword'
 MYSQL_DB = 'test'
-MYSQL_CHARSET = 'utf8'
+MYSQL_CHARSET = 'utf8mb4'

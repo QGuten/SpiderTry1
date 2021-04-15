@@ -22,6 +22,9 @@ def getDataFormList(temp_list):
 base_url = 'https://m.weibo.cn/api/container/getIndex?'
 headers = {
     'Host': 'm.weibo.cn',
+    'method': 'GET',
+    'Accept-Language': 'zh-CN,zh;q=0.9',
+    'accept-encoding': 'gzip, deflate, br',
     'cookie': 'SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WhD2inmZvEY9N-ZNkH52FmA5NHD95QcS0qfS02p1h24Ws4DqcjMi--NiK.Xi-2Ri--ciKnRi-zNSoMcSKMpeKnp1Btt; SUB=_2A25NS2XoDeRhGeBJ7VcW8S_EyjWIHXVutAugrDV6PUJbktAfLVnykW1NRinJWjp3NXZmmLtKIAOPjHDJB-LZA8fo; SSOLoginState=1615795640; MLOGIN=1; WEIBOCN_FROM=1110103030; _T_WM=93057680546; XSRF-TOKEN=ba3044; M_WEIBOCN_PARAMS=luicode%3D10000011%26lfid%3D100103type%253D98%2526q%253D%25E6%258A%2591%25E9%2583%2581%25E7%2597%2587%2526t%253D0%26featurecode%3D10000326%26oid%3D4594832997101078%26fid%3D100808f86f9e10c1d3bdefe430d95f95388c90_-_feed%26uicode%3D10000011',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36',
     'X-Requested-With': 'XMLHttpRequest',
@@ -153,7 +156,7 @@ def parse_page(json, page: int):
 
 
 if __name__ == '__main__':
-    since_id = '4625611660203256'
+    since_id = '4208579865017875'
     db.create_t_blogs()
     for page in range(1, max_page + 1):
         print('main函数中打印的page:'+str(page))
@@ -162,4 +165,4 @@ if __name__ == '__main__':
         # print(type(json)) # tuple
         # print(since_id, *json)
         since_id = parse_page(*json)    # 获取下一页的since_id
-        time.sleep(random.uniform(4,14))
+        time.sleep(random.uniform(4,10))
