@@ -156,7 +156,7 @@ def parse_page(json, page: int):
 
 
 if __name__ == '__main__':
-    since_id = '4208579865017875'
+    since_id = '4108231562017875'
     db.create_t_blogs()
     for page in range(1, max_page + 1):
         print('main函数中打印的page:'+str(page))
