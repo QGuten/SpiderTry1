@@ -19,4 +19,20 @@ def show_creators(request):
     except Exception as e:
         response['msg'] = str(e)
         response['error_num'] = 1
+
+    return JsonResponse(response)
+
+
+@require_http_methods(["Get"])
+def show_blogs(request):
+    response = {}
+    try:
+        creators = Blog.object.filter()
+        response['list'] = json.loads(serializers.serialize("json", creators))
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except Exception as e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
+
     return JsonResponse(response)
